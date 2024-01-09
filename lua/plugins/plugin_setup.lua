@@ -17,29 +17,39 @@ if not status then
 end
 
 return require("packer").startup(function(use)
-    use("wbthomason/packer.nvim")
-    use("lewis6991/impatient.nvim")
-    use("rcarriga/nvim-notify")
-    use("timonv/vim-cargo")
-    use("tpope/vim-surround")
-    use("vim-scripts/ReplaceWithRegister")
-    use("numToStr/Comment.nvim")
-    use("akinsho/toggleterm.nvim")
+    -- Plugin Manager
+    use("wbthomason/packer.nvim") -- package manager
 
+    -- Utilities
+    use("lewis6991/impatient.nvim") -- speed up loading time
+    use("rcarriga/nvim-notify") -- notifications
+    use("akinsho/toggleterm.nvim") -- terminal in a floating window
+    use("rmagatti/auto-session") -- auto save session
+    use("windwp/nvim-autopairs") -- auto pairs
+    use({ -- show trouble diagnostics
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+    })
+    use("lukas-reineke/indent-blankline.nvim") -- indent lines
+
+    -- File Explorer
     use("nvim-tree/nvim-tree.lua")
-    use("nvim-lualine/lualine.nvim")
-    use("akinsho/bufferline.nvim")
-    use("github/copilot.vim")
 
-    use("rmagatti/auto-session")
+    -- Status Line
+    use("nvim-lualine/lualine.nvim") -- status line (bottom bar)
+    use("akinsho/bufferline.nvim") -- buffer line (top bar)
 
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
-    use("simrat39/rust-tools.nvim")
-    use("jayp0521/mason-null-ls.nvim")
-    use("jose-elias-alvarez/null-ls.nvim")
-    use("glepnir/lspsaga.nvim")
-    use({
+    --  Auto Completion
+    use("github/copilot.vim") -- github copilot
+    use("numToStr/Comment.nvim") -- returns types or etc smart comments
+
+    -- LSP Installer
+    use("williamboman/mason.nvim") -- lsp server package manager
+    use("williamboman/mason-lspconfig.nvim") -- bridge between lspconfig and mason
+
+    -- With Rust Programming
+    use("simrat39/rust-tools.nvim") -- rust syntax highlighting, requires "rust-analyzer"
+    use({ -- managing rust crates dependencies
         "saecki/crates.nvim",
         tag = "v0.3.0",
         requires = { "nvim-lua/plenary.nvim" },
@@ -48,10 +58,15 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use("ziglang/zig.vim")
-    use({ "scalameta/nvim-metals", requires = { "nvim-lua/plenary.nvim" } })
+    -- LSP
+    use("neovim/nvim-lspconfig") -- easily configure language servers
+    use("glepnir/lspsaga.nvim") -- lsp ui
+    use("ray-x/lsp_signature.nvim") -- show function signature while typing
 
+    -- Lua
     use("nvim-lua/plenary.nvim")
+
+    -- Telescope
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
     use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
     use({
@@ -62,45 +77,33 @@ return require("packer").startup(function(use)
         requires = { "kkharji/sqlite.lua" },
     })
 
+    -- Colorscheme
     use({
-        "cr0sh/one-nvim",
+        "projekt0n/github-nvim-theme",
         config = function()
-            vim.cmd([[colorscheme one-nvim]])
+            vim.cmd([[colorscheme github_dark_default]])
         end,
     })
+    use("hiphish/rainbow-delimiters.nvim") -- rainbow parentheses
 
-    use("neovim/nvim-lspconfig") -- easily configure language servers
-    use("ray-x/lsp_signature.nvim")
-
+    -- Autocompletion
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
-    -- Useful completion sources:
     use("hrsh7th/cmp-nvim-lua")
     use("hrsh7th/cmp-nvim-lsp-signature-help")
     use("hrsh7th/cmp-vsnip")
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-buffer")
-    use("hrsh7th/vim-vsnip")
-    use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports
-    use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
-    use("L3MON4D3/LuaSnip")
-    use("windwp/nvim-autopairs")
-    use("hiphish/rainbow-delimiters.nvim")
+
     use("nathanaelkane/vim-indent-guides")
 
-    -- treesitter configuration
+    -- Treesitter
     use({
         "nvim-treesitter/nvim-treesitter",
         run = function()
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
     })
-    use({
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-    })
-
-    use("TimUntersberger/neogit")
 
     use({
         "iamcco/markdown-preview.nvim",
@@ -122,14 +125,15 @@ return require("packer").startup(function(use)
         end,
     })
 
+    -- Git
+    use("NeogitOrg/neogit")
     use("lewis6991/gitsigns.nvim")
-    use("editorconfig/editorconfig-vim")
---    use({
---        "morhetz/gruvbox",
---        config = function()
---            vim.cmd.colorscheme("gruvbox")
---        end,
---    })
+
+    -- deprecated
+    use("jayp0521/mason-null-ls.nvim") -- birdge between null-ls and mason
+    use("jose-elias-alvarez/null-ls.nvim")
+    -- use("tpope/vim-surround") -- surroundings in pairs
+    -- use("editorconfig/editorconfig-vim")
 
     if packer_bootstrap then
         require("packer").sync()

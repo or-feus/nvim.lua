@@ -59,6 +59,7 @@ require("plugins.trouble")
 require("plugins.bufferline")
 require("plugins.gitsigns")
 require("plugins.notify")
+require("plugins.neogit")
 
 require("plugins.lsp.lsp")
 require("plugins.lsp.null_ls")
