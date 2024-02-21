@@ -1,6 +1,17 @@
-### 임시 메모장<br>
 
-amazon linux 2에서 nvim을 설치하기 위해 `cmake`는 3 이상의 버전이 필요
+### neovim
+
+rust
+* rust-analyzer
+
+teserver
+* pnpm
+* node
+* eslint
+
+terraform
+* terraform-ls
+
 
 ----
 #### Step 1. install packages
@@ -24,7 +35,7 @@ make
 sudo make install
 ```
 
-#### Step 4. Install Neovim <b>9버전으로 설치 필요!!</b>
+#### Step 4. Install neovim, need nvim version >= 0.9
 ```
 sudo pip3 install neovim --upgrade
 
