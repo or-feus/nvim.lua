@@ -12,7 +12,6 @@ teserver
 terraform
 * terraform-ls
 
-
 ----
 #### Step 1. install packages
 ```
@@ -49,3 +48,12 @@ make CMAKE_BUILD_TYPE=Release
 make install
 
 ```
+
+---
+### etc.
+
+
+1. telescope live_grep requires `ripgrep` <br>
+
+`brew install repgrep`
+
