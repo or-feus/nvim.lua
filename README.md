@@ -55,5 +55,5 @@ make install
 
 1. telescope live_grep requires `ripgrep` <br>
 
-`brew install repgrep`
+`brew install ripgrep`
 
