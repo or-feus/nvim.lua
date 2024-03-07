@@ -40,7 +40,24 @@ return require("packer").startup(function(use)
     use("akinsho/bufferline.nvim") -- buffer line (top bar)
 
     --  Auto Completion
-    use("github/copilot.vim") -- github copilot
+    -- use("github/copilot.vim") -- github copilot
+
+    use({
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({})
+        end,
+    })
+    use({
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+    })
+
     use("numToStr/Comment.nvim") -- returns types or etc smart comments
 
     -- LSP Installer
@@ -77,21 +94,22 @@ return require("packer").startup(function(use)
         requires = { "kkharji/sqlite.lua" },
     })
 
-    -- Colorscheme
     use({
-        "projekt0n/github-nvim-theme",
+        "rebelot/kanagawa.nvim",
         config = function()
-            vim.cmd([[colorscheme github_dark_default]])
+            vim.cmd([[colorscheme kanagawa-dragon]])
         end,
     })
     use("hiphish/rainbow-delimiters.nvim") -- rainbow parentheses
 
     -- Autocompletion
+
+    -- Installation
+    use("L3MON4D3/LuaSnip")
     use("hrsh7th/nvim-cmp")
+    use("saadparwaiz1/cmp_luasnip")
     use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
     use("hrsh7th/cmp-nvim-lua")
-    use("hrsh7th/cmp-nvim-lsp-signature-help")
-    use("hrsh7th/cmp-vsnip")
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-buffer")
 
